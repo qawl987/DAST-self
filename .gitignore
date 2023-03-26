@@ -1,0 +1,8 @@
+10FEMTO/Learning_set/
+10FEMTO/Test_set/
+10FEMTO/Validation_Set/
+10FEMTO/__pycache__/
+__pycache__/
+cmapss/
+*.mat
+*.zip
