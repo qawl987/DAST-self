@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from network.DAST_utils import *
+from DAST_utils import *
 import sys
 
 class Sensors_EncoderLayer(torch.nn.Module):
