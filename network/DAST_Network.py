@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from DAST_utils import *
+from network.DAST_utils import *
 import sys
 
 class Sensors_EncoderLayer(torch.nn.Module):
@@ -72,17 +72,17 @@ class DAST(torch.nn.Module):
         self.dropout = nn.Dropout(dropout)
         self.debug = debug
         #Initiate Sensors encoder
-        self.sensor_encoder = []
+        self.sensor_encoder = nn.ModuleList() # []
         for i in range(n_encoder_layers):
             self.sensor_encoder.append(Sensors_EncoderLayer(dim_val_s, dim_attn_s, n_heads))
                 
         #Initiate Time_step encoder
-        self.time_encoder = []    
+        self.time_encoder = nn.ModuleList()   # []
         for i in range(n_encoder_layers):
             self.time_encoder.append(Time_step_EncoderLayer(dim_val_t, dim_attn_t, n_heads))        
                 
         #Initiate Decoder
-        self.decoder = []
+        self.decoder = nn.ModuleList()
         for i in range(n_decoder_layers):
             self.decoder.append(DecoderLayer(dim_val, dim_attn, n_heads))
                     
@@ -93,8 +93,6 @@ class DAST(torch.nn.Module):
         self.dec_input_fc = nn.Linear(input_size, dim_val)
         self.out_fc = nn.Linear(dec_seq_len * dim_val, out_seq_len)
         self.norm1 = nn.LayerNorm(dim_val)
-        
-        # modified
         
     
     def forward(self, x):
@@ -125,7 +123,7 @@ class DAST(torch.nn.Module):
         if self.debug == True: print('embedding decoder X: ', d.size())
         #output the RUL
         #x = self.out_fc(d.flatten(start_dim=1))
-        x = self.out_fc(F.elu(d.flatten(start_dim=1)))     
+        x = self.out_fc(F.elu(d.flatten(start_dim=1)))   
         if self.debug == True: print('output X: ', x.size())   
         return x
     

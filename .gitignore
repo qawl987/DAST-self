@@ -3,6 +3,7 @@
 10FEMTO/Validation_Set/
 10FEMTO/__pycache__/
 __pycache__/
-cmapss/
+data/
 *.mat
 *.zip
+unused/
