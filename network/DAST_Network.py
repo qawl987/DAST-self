@@ -4,6 +4,7 @@ import torch.nn.functional as F
 import numpy as np
 from DAST_utils import *
 import sys
+DEBUG = True
 
 class Sensors_EncoderLayer(torch.nn.Module):
     def __init__(self, dim_val, dim_attn, n_heads = 1,dropout=0.1):
@@ -16,7 +17,9 @@ class Sensors_EncoderLayer(torch.nn.Module):
         self.dropout = nn.Dropout(dropout)
     
     def forward(self, x):
+        if DEBUG == True: print('Sensor encoder input: ', x.shape)
         a = self.attn(x)
+        if DEBUG == True: print('Sensor encoder attn: ', a.size())
         x = self.norm1(x + a)  
         a = self.fc1(F.elu(self.fc2(x)))
         x = self.norm2(x + a)        
@@ -34,7 +37,9 @@ class Time_step_EncoderLayer(torch.nn.Module):
         self.norm2 = nn.LayerNorm(dim_val)
     
     def forward(self, x):
+        if DEBUG == True: print('Time encoder input: ', x.size())
         a = self.attn(x)
+        if DEBUG == True: print('Time encoder attn: ', a.size())
         x = self.norm1(x + a)                 
         a = self.fc1(F.elu(self.fc2(x))) 
         x = self.norm2(x + a)          
@@ -100,9 +105,10 @@ class DAST(torch.nn.Module):
         if self.debug == True: print('input X: ', x.size())
         sensor_x = x.transpose(1,2)
         if self.debug == True: print('sensor X: ', sensor_x.size())
-        
+        print(self.sensor_enc_input_fc(sensor_x).shape)
         e = self.sensor_encoder[0](self.sensor_enc_input_fc(sensor_x)) #((batch_size,sensor,dim_val_s))
         if self.debug == True: print('sensor encoder X: ', e.size())
+        print(self.timestep_enc_input_fc(x).shape)
         o = self.time_encoder[0](self.pos_t(self.timestep_enc_input_fc(x))) #((batch_size,timestep,dim_val_t))
         if self.debug == True: print('time encoder X: ', o.size())
         # sensors encoder 

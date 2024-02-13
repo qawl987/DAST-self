@@ -3,7 +3,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 import math
-
+from enum import Enum
+DEBUG = True
 
 def a_norm(Q, K):
     m = torch.matmul(Q, K.transpose(2,1).float())
@@ -104,11 +105,13 @@ class Sensor_MultiHeadAttentionBlock(torch.nn.Module):
                               
     def forward(self, x, kv = None):
         a = []
+        if DEBUG == True: print('Sensor MHA input: ', x.shape)
         for h in self.heads:
             a.append(h(x, kv = kv))
         a = torch.stack(a, dim = -1) 
         a = a.flatten(start_dim = 2)         
         x = self.fc(a) 
+        if DEBUG == True: print('Sensor MHA output: ', x.shape)
         return x
 
 class TimeStepMultiHeadAttentionBlock(torch.nn.Module): 
