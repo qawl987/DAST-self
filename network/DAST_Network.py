@@ -139,9 +139,9 @@ class DAST(torch.nn.Module):
         
         e1 = self.sensor_encoder1[0](self.sensor_enc_input_fc(
             feature1))  # ((batch_size,sensor,dim_val_s))
-        e2 = self.sensor_encoder1[0](self.sensor_enc_input_fc(
+        e2 = self.sensor_encoder2[0](self.sensor_enc_input_fc(
             feature2))
-        e3 = self.sensor_encoder1[0](self.sensor_enc_input_fc(
+        e3 = self.sensor_encoder3[0](self.sensor_enc_input_fc(
             feature3))
         if DEBUG == True:
             print('sensor encoder X: ', e1.shape, e2.shape, e3.shape, )
