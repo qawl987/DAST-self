@@ -75,8 +75,8 @@ class DecoderLayer(torch.nn.Module):
 
 class DAST(torch.nn.Module):
     def __init__(self, dim_val_s, dim_attn_s, dim_val_t, dim_attn_t, dim_val, dim_attn, time_step,
-                 input_size, dec_seq_len, out_seq_len, n_decoder_layers=1, n_encoder_layers=1,
-                 n_heads=1, feature_len=16, debug=False, dropout=0.1):
+                 feature_len, dec_seq_len, out_seq_len, n_decoder_layers=1, n_encoder_layers=1,
+                 n_heads=1, debug=False, dropout=0.1):
 
         super(DAST, self).__init__()
         self.dec_seq_len = dec_seq_len
@@ -110,11 +110,11 @@ class DAST(torch.nn.Module):
 
         self.pos_s = PositionalEncoding(dim_val_s)
         self.pos_t = PositionalEncoding(dim_val_t)
-        self.timestep_enc_input_fc = nn.Linear(input_size, dim_val_t)
+        self.timestep_enc_input_fc = nn.Linear(feature_len, dim_val_t)
         self.sensor_enc_input_fc = nn.Linear(time_step, dim_val_s)
-        self.dec_input_fc1 = nn.Linear(input_size, dim_val)
-        self.dec_input_fc2 = nn.Linear(input_size * 2, dim_val)
-        self.dec_input_fc3 = nn.Linear(input_size * 4, dim_val)
+        self.dec_input_fc1 = nn.Linear(feature_len, dim_val)
+        self.dec_input_fc2 = nn.Linear(feature_len * 2, dim_val)
+        self.dec_input_fc3 = nn.Linear(feature_len * 4, dim_val)
         self.out_fc = nn.Linear(dec_seq_len * dim_val * 3, out_seq_len)
         self.norm1 = nn.LayerNorm(dim_val)
         self.feature_len = feature_len
