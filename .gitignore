@@ -7,3 +7,4 @@ data/
 *.mat
 *.zip
 unused/
+model/
