@@ -48,10 +48,11 @@ You need to intall appropriate torch version with GPU according to your CUDA ver
 ### Dataset
 
 1. Download dataset from `https://github.com/wkzs111/phm-ieee-2012-data-challenge-dataset`
+```
 I personally create data folder and put under /data/10FEMTO/raw_data/
 and move Bearing1_1, Bearing1_2, Bearing2_1, Bearing2_2, Bearing3_1, Bearing3_3 under Validation_set.
-That is all raw data path /data/10FEMTO/raw_data/Validation_set/
-
+All raw data path /data/10FEMTO/raw_data/Validation_set/
+```
 <!-- USAGE EXAMPLES -->
 ## Usage
 
