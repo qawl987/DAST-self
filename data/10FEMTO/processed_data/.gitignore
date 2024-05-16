@@ -1,2 +1,5 @@
-*
+Mat_test
+Mat_train
+Mat_valid
+Unused
 !.gitignore
