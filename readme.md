@@ -29,7 +29,41 @@ CUDA Version: 10.1
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Getting Started in Colab
+### Prerequirement & Installation
+No!
+### Dataset
+1. Download zip from `https://github.com/wkzs111/phm-ieee-2012-data-challenge-dataset`
+2. upload zip to your google drive, don't extract and upload it will take long time.
+### Pull github repo
+1. create a colab notebook in your drive
+2. run below command
+```
+from google.colab import drive
+drive.mount('/content/drive')
+%cd /content/drive/MyDrive/
+!git clone https://github.com/qawl987/DAST-self
+```
+3. close this notebook
+### Run the autorun notebook
+1. open /content/drive/MyDrive/DAST-self/notebook/FEMTO-st/DAST_run.ipynb
+2. unzip the dataset zip in workspace & copy to drive for future reuse
+```
+!unzip /content/drive/MyDrive/phm-ieee-2012-data-challenge-dataset-master.zip -d /content/
+!cp -r "/content/phm-ieee-2012-data-challenge-dataset-master" "/content/drive/MyDrive/TMP-for-DAST"
+```
+3. move TMP folder dataset to DAST-self project folder
+```
+!mv /content/drive/MyDrive/TMP-for-DAST/phm-ieee-2012-data-challenge-dataset-master/Full_Test_Set/* /content/drive/MyDrive/DAST-self/data/10FEMTO/raw_data/Validation_set
+!mv /content/drive/MyDrive/TMP-for-DAST/phm-ieee-2012-data-challenge-dataset-master/Learning_set/* /content/drive/MyDrive/DAST-self/data/10FEMTO/raw_data/Validation_set
+```
+4. preprocess
+Choose dataset & run the preprocess block
+5. DL
+Set hyperparameter & run the DL block
+6. TL
+Set hyperparameter & run the TL block
+## Getting Started in Local
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
@@ -47,10 +81,9 @@ You need to intall appropriate torch version with GPU according to your CUDA ver
 
 ### Dataset
 
-1. Download dataset from `https://github.com/wkzs111/phm-ieee-2012-data-challenge-dataset`
+1. Download dataset from `https://github.com/wkzs111/phm-ieee-2012-data-challenge-dataset` & extract zip
 ```
-I personally create data folder and put under /data/10FEMTO/raw_data/
-and move Bearing1_1, Bearing1_2, Bearing2_1, Bearing2_2, Bearing3_1, Bearing3_3 under Validation_set.
+move all folder under Full_Test_Set/ and Learning_set/ to /data/10FEMTO/raw_data/Validation_set/ 
 All raw data path /data/10FEMTO/raw_data/Validation_set/
 ```
 <!-- USAGE EXAMPLES -->
