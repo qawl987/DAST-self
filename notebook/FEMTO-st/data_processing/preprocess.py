@@ -77,7 +77,10 @@ class Process():
         return normalized_values
 
     def _get_feature(self, acc: str):
-        x = pd.read_csv(acc, header=None, sep=',', usecols=[4])
+        try:
+          x = pd.read_csv(acc, header=None, sep='[,;]', usecols=[4], engine='python')
+        except:
+          print(acc)
         feature1 = self._extract_feature(x, self.min_signal * 4)
         tmp1 = self._extract_feature(x[:2 * self.min_signal], self.min_signal * 2)
         tmp2 = self._extract_feature(x[2 * self.min_signal:], self.min_signal * 2)
