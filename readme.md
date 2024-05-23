@@ -48,6 +48,11 @@ drive.mount('/content/drive')
 ### Run the autorun notebook
 1. open /content/drive/MyDrive/DAST-self/notebook/FEMTO-st/DAST_run.ipynb
 2. unzip the dataset zip in workspace & copy to drive for future reuse
+#### 注意
+1. 資料集部分只要跑一次即可，會存到google drive中
+2. 以下指令複製PHM 2012資料集後在當下這個colab notebook中的workspace可見，但實際上複製到drive的過程很慢，如果關掉或結束這個colab執行階段，需要等大概1或2小時才可在google drive中實際見到資料。所以解決方法1. 不要關掉這個colab跑完 2. 先跑到複製的指令後，等1,2小時後回來直接跑下面的實驗即可。
+!cp -r "/content/phm-ieee-2012-data-challenge-dataset-master" "/content/drive/MyDrive/TMP-for-DAST"
+
 ```
 !unzip /content/drive/MyDrive/phm-ieee-2012-data-challenge-dataset-master.zip -d /content/
 !cp -r "/content/phm-ieee-2012-data-challenge-dataset-master" "/content/drive/MyDrive/TMP-for-DAST"
